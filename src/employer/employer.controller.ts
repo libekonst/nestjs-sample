@@ -6,6 +6,7 @@ import {
   Put,
   Param,
   Delete,
+  Query,
 } from '@nestjs/common';
 import { EmployerService } from './employer.service';
 import { EmployerDto } from './employer.dto';
@@ -24,8 +25,11 @@ export class EmployerController {
    * Get an employer by id.
    */
   @Get(':id')
-  getEmployer(@Param('id') id: string) {
-    console.log(id);
+  getEmployer(
+    @Param('id') id: string,
+    @Query('getRelatedEmployees') getRelatedEmployes: boolean,
+  ) {
+    console.log(id, getRelatedEmployes);
     return this.service.findByIdOrFail(id);
   }
 
